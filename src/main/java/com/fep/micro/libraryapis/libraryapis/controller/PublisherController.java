@@ -15,7 +15,7 @@ public class PublisherController {
 	@GetMapping(path="/{publisherId}")
 	public Publisher getPublisher(@PathVariable String publisherId) {
 				
-		return new Publisher(publisherId, "Prentice Hall Publishers", "rentice@gmail.com", "123-456-7890");
+		return new Publisher(publisherId, "Prentice Hall Publishers", "rentice@gmail.com", "123-456-7891");
 	}
 	
 	
