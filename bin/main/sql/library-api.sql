@@ -84,18 +84,20 @@ CREATE TABLE AUTHOR_SEQUENCE (
 
 INSERT INTO AUTHOR_SEQUENCE (Author_Id, next_val) VALUES (3111,3112);
 
-CREATE TABLE BOOK_AUTHOR (
+      
+      
+      CREATE TABLE BOOK_AUTHOR (
       Book_Id INT ,
       Author_Id INT,
       FOREIGN KEY fk_author(Author_Id) REFERENCES AUTHOR(Author_Id),
-      FOREIGN KEY fk_book(Book_Id) REFERENCES BOOK(Book_Id)
+      FOREIGN KEY fk_book_author(Book_Id) REFERENCES BOOK(Book_Id)
       );
-
-CREATE TABLE BOOK_STATUS (
+      
+      CREATE TABLE BOOK_STATUS (
 		Book_Id INT PRIMARY KEY,
 		State ENUM('Active', 'Inactive') NOT NULL,
 		Total_Number_Of_Copies INT NOT NULL,
 		Number_Of_Copies_Issued INT DEFAULT 0,
-		FOREIGN KEY fk_book(Book_Id) REFERENCES BOOK(Book_Id)
+		FOREIGN KEY fk_book_status(Book_Id) REFERENCES BOOK(Book_Id)
 	);
 
