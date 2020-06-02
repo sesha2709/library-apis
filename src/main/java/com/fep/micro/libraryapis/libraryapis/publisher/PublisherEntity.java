@@ -13,6 +13,11 @@ import javax.persistence.Table;
 public class PublisherEntity {
 	
 	
+	public PublisherEntity() {
+		
+	}
+	
+	
 	public PublisherEntity(String name, String email_id, String phone_no) {
 		
 		

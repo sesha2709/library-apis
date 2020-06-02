@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fep.micro.libraryapis.libraryapis.exception.LibraryResourceAlreadyExistsException;
+import com.fep.micro.libraryapis.libraryapis.exception.LibraryResourceNotFoundException;
 
 @RestController
 @RequestMapping(path = "/v1/publishers")
@@ -23,9 +24,19 @@ public class PublisherController {
 	private PublisherService publisherService;
 
 	@GetMapping(path = "/{publisherId}")
-	public Publisher getPublisher(@PathVariable Integer publisherId) {
+	public ResponseEntity<?> getPublisher(@PathVariable Integer publisherId) {
 
-		return new Publisher(publisherId, "Prentice Hall Publishers", "rentice@gmail.com", "123-456-7891");
+		Publisher publisher = null;
+
+		try {
+			publisher = publisherService.getPublisher(publisherId);
+		} catch (LibraryResourceNotFoundException e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+		}
+		return new ResponseEntity<>(publisher, HttpStatus.OK);
+
 	}
 
 	@PostMapping
@@ -35,10 +46,10 @@ public class PublisherController {
 			publisher = publisherService.addPublisher(publisher);
 
 		} catch (LibraryResourceAlreadyExistsException e) {
-			// TODO Auto-generated catch block
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<>(publisher,HttpStatus.CREATED);
+		return new ResponseEntity<>(publisher, HttpStatus.CREATED);
 
 	}
 
