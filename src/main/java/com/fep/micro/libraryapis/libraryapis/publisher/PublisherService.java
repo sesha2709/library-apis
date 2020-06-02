@@ -17,8 +17,7 @@ public class PublisherService {
 	}
 
 	public Publisher addPublisher(Publisher publisherTobeAdded) throws LibraryResourceAlreadyExistsException {
-		// TODO Auto-generated method stub
-
+		
 		PublisherEntity publisherEntity = new PublisherEntity(
 
 				publisherTobeAdded.getName(), publisherTobeAdded.getEmailId(), publisherTobeAdded.getPhoneNumber()
@@ -30,7 +29,7 @@ public class PublisherService {
 		try {
 			addedPublisher = publisherRespository.save(publisherEntity);
 		} catch (DataIntegrityViolationException e) {
-			// TODO Auto-generated catch block
+			
 			throw new LibraryResourceAlreadyExistsException("Publisher Already Exists");
 		}
 
