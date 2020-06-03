@@ -3,6 +3,7 @@ package com.fep.micro.libraryapis.libraryapis.publisher;
 import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fep.micro.libraryapis.libraryapis.exception.LibraryResourceAlreadyExistsException;
@@ -62,7 +63,7 @@ public class PublisherService {
 
 	private Publisher createPubliser(PublisherEntity pe) {
 
-		return new Publisher(pe.getPublisherId(), pe.getName(), pe.getPhone_no(), pe.getEmail_id());
+		return new Publisher(pe.getPublisherId(), pe.getName(), pe.getEmail_id(),pe.getPhone_no());
 	}
 
 	public void updatePublisher(Publisher publisherToBeUpdated) throws LibraryResourceNotFoundException {
@@ -92,6 +93,17 @@ public class PublisherService {
 					"No Publisher found with the Id : " + publisherToBeUpdated.getPublisherId());
 		}
 
+	}
+
+	public void deletePublisher(Integer publisherId) throws LibraryResourceNotFoundException {
+
+		try {
+			publisherRespository.deleteById(publisherId);
+
+		} catch (EmptyResultDataAccessException e) {
+			throw new LibraryResourceNotFoundException("Publisher with the ID :" + publisherId + " Cannot be deleted");
+
+		}
 	}
 
 }
