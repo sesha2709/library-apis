@@ -21,7 +21,7 @@ public class PublisherEntity {
 	public PublisherEntity(String name, String email_id, String phone_no) {
 		
 		
-		this.name = name;
+		this.name = name;		
 		this.email_id = email_id;
 		this.phone_no = phone_no;
 	}
