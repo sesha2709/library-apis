@@ -1,10 +1,19 @@
 package com.fep.micro.libraryapis.libraryapis.publisher;
 
+import javax.validation.constraints.*;
+
+
 public class Publisher {
 
 	private Integer publisherId;
+	
+	@Size(min =1 , max=50, message="The Publisher Name must be between 1 to 50 characters")
 	private String name;
+	
+	@Email(message="Please enter a valid email address")
 	private String emailId;
+	
+	@Pattern(regexp = "\\d{3}-\\d{3}-\\d{3}",message="Please enter the phone number in 123-456-789")
 	private String phoneNumber;
 	
 	public Publisher() {
