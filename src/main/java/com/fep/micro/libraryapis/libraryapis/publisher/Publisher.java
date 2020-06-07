@@ -1,13 +1,26 @@
-package com.fep.micro.libraryapis.libraryapis.domain;
+package com.fep.micro.libraryapis.libraryapis.publisher;
+
+import javax.validation.constraints.*;
+
 
 public class Publisher {
 
-	private String publisherId;
+	private Integer publisherId;
+	
+	@Size(min =1 , max=50, message="The Publisher Name must be between 1 to 50 characters")
 	private String name;
+	
+	@Email(message="Please enter a valid email address")
 	private String emailId;
+	
+	@Pattern(regexp = "\\d{3}-\\d{3}-\\d{3}",message="Please enter the phone number in 123-456-789")
 	private String phoneNumber;
+	
+	public Publisher() {
+		
+	}
 
-	public Publisher(String publisherId, String name, String emailId, String phoneNumber) {
+	public Publisher(Integer publisherId, String name, String emailId, String phoneNumber) {
 		super();
 		this.publisherId = publisherId;
 		this.name = name;
@@ -15,11 +28,11 @@ public class Publisher {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getPublisherId() {
+	public Integer getPublisherId() {
 		return publisherId;
 	}
 
-	public void setPublisherId(String publisherId) {
+	public void setPublisherId(Integer publisherId) {
 		this.publisherId = publisherId;
 	}
 
